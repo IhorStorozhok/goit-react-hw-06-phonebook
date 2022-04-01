@@ -4,7 +4,7 @@ import {  useDispatch } from "react-redux";
 import { contactAdd } from "redux/slices/contactsContacts";
 import PropTypes from "prop-types";
 
-console.log(contactAdd)
+
 
 const ContactInput = ({ whenSubmit }) => {
   
