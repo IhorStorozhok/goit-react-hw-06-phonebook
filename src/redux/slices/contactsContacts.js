@@ -16,7 +16,9 @@ initialState:contactsFromLocalStorage??[],
                 localStorage.setItem("contacts", JSON.stringify(state))}  },
         contactDelete: (state, action) => {
             
-          return state= state.filter(contact => contact.name !== action.payload)
+            state = state.filter(contact => contact.name !== action.payload); localStorage.setItem("contacts", JSON.stringify(state));
+            return state
+
             
         
         }
