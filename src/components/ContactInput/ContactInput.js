@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import s from "../ContactInput/ContactInput.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { contactAdd } from "redux/slices/contactsContacts";
 import PropTypes from "prop-types";
 
@@ -10,7 +10,7 @@ const ContactInput = ({ whenSubmit }) => {
   
 
   const dispatch= useDispatch()
-  const myContacts = useSelector((state) => { return state })
+ 
 
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");

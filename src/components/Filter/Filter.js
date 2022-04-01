@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import s from "./Filter.module.css";
 import { addToFilter } from "redux/slices/contactsContacts";
 import { useSelector,useDispatch } from "react-redux";
 
-const Filter = ({ onFiltred }) => {
+const Filter = () => {
   
 
   const dispatch= useDispatch()
