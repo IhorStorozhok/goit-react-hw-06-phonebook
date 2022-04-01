@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import s from "./Filter.module.css";
-import PropTypes from "prop-types";
+import { addToFilter } from "redux/slices/contactsContacts";
+import { useSelector,useDispatch } from "react-redux";
 
 const Filter = ({ onFiltred }) => {
-  const [query, setQuery] = useState("");
+  
 
-  const handleFilter = (e) => {
-    setQuery(e.currentTarget.value);
-    onFiltred(e.currentTarget.value);
-  };
+  const dispatch= useDispatch()
+  const filterInputValue = useSelector((state) => { return state.filter })
+
+  
+   
+  
 
   return (
     <label className={s.inputLabel}>
       Find contacts by name
       <input
-        onChange={handleFilter}
-        value={query}
+        onChange={(e)=>{dispatch(addToFilter(e.currentTarget.value))}}
+        value={filterInputValue}
         type="text"
         className={s.contactInput}
         name="filter"
@@ -27,33 +30,7 @@ const Filter = ({ onFiltred }) => {
   );
 };
 
-// class Filter extends React.Component {
-//   state = { query: "" };
 
-//   handleFilter = (e) => {
-//     this.setState({ query: e.currentTarget.value });
-//     this.props.onFiltred(e.currentTarget.value);
-//   };
-
-//   render() {
-//     const { query } = this.state;
-//     return (
-//       <label className={s.inputLabel}>
-//         Find contacts by name
-//         <input
-//           onChange={this.handleFilter}
-//           value={query}
-//           type="text"
-//           className={s.contactInput}
-//           name="filter"
-//           autoComplete="off"
-//           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-//           required
-//         />
-//       </label>
-//     );
-//   }
-// }
 export default Filter;
 
-Filter.propTypes = { onFiltred: PropTypes.func };
+

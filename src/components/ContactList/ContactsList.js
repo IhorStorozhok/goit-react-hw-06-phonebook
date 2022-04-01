@@ -1,21 +1,34 @@
 import React from "react";
 import s from "./ContactList.module.css";
-import PropTypes from "prop-types";
 
-const ContactList = ({ contacts, onDeleteButton }) => {
+import { contactDelete } from "redux/slices/contactsContacts";
+import { useSelector,useDispatch } from "react-redux";
+
+
+const ContactList = () => {
+
+  const dispatch= useDispatch()
+  const contacts = useSelector((state) => { return state })
+
+  
+
+   const filtredContacts = contacts.filter!==""?contacts.contacts.filter(cont=>cont.name.toLowerCase().includes((contacts.filter).toLowerCase())):contacts.contacts
+  
+  
+  
   return (
+    
     <div>
-      <ul>
-        {contacts.map((contact) => {
+            <ul>
+        {filtredContacts.map((contact) => {
           return (
-            <li className={s.contactListItem} key={contact.id}>
+            <li className={s.contactListItem} key={contact.name}>
               <span>{contact.name}:</span>
               <span> {contact.number}</span>
               <button
                 className={s.deleteButton}
                 type="button"
-                id={contact.id}
-                onClick={onDeleteButton}
+                 onClick={()=>{dispatch(contactDelete(contact.name))}}
               >
                 delete
               </button>
@@ -30,7 +43,3 @@ const ContactList = ({ contacts, onDeleteButton }) => {
 
 export default ContactList;
 
-ContactList.propTypes = {
-  contacts: PropTypes.array,
-  onDeleteButton: PropTypes.func,
-};

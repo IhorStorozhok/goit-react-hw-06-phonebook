@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import s from "../ContactInput/ContactInput.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { contactAdd } from "redux/slices/contactsContacts";
 import PropTypes from "prop-types";
 
+console.log(contactAdd)
+
 const ContactInput = ({ whenSubmit }) => {
+  
+
+  const dispatch= useDispatch()
+  const myContacts = useSelector((state) => { return state })
+
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
 
@@ -14,9 +23,11 @@ const ContactInput = ({ whenSubmit }) => {
     setNumber(evt.currentTarget.value);
   };
 
+
+
   const handleSaveContact = (evt) => {
     evt.preventDefault();
-    whenSubmit(name, number);
+    dispatch(contactAdd({name:name,number:number}))
     setName("");
     setNumber("");
   };
